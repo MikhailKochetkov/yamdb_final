@@ -17,7 +17,9 @@ def validate_non_reserved(value):
 
 
 def validate_username_allowed_chars(value):
-    invalid_chars = ''.join(set(settings.USERNAME_VALID_PATTERN.sub('', value)))
+    invalid_chars = ''.join(
+        set(settings.USERNAME_VALID_PATTERN.sub('', value))
+    )
     if invalid_chars:
         raise ValidationError(
             ERROR_USERNAME_SYMBOL.format(invalid_chars)

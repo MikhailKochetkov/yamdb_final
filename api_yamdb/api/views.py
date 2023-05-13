@@ -1,5 +1,4 @@
 import random
-
 from django.conf import settings
 from django.core.mail import send_mail
 from django.db import IntegrityError
@@ -21,7 +20,6 @@ from rest_framework.validators import ValidationError
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from rest_framework_simplejwt.tokens import RefreshToken
-
 from api.filters import TitleFilterSet
 from api.permissions import AdminOrReadOnly, AdminOnly, AuthorOrStuffOrReadOnly
 from api.serializers import (

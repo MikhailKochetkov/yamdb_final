@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-
 from reviews.validators import (
     validate_non_reserved,
     validate_username_allowed_chars,
@@ -32,7 +31,7 @@ class User(AbstractUser):
     role = models.CharField(
         choices=ROLES_CHOICES,
         default=settings.ROLE_USER,
-        max_length=max(len(role) for role,_ in ROLES_CHOICES)
+        max_length=max(len(role) for role, _ in ROLES_CHOICES)
     )
     bio = models.TextField(blank=True, null=True)
     confirmation_code = models.CharField(
