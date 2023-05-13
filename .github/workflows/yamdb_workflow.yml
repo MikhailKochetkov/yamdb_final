@@ -43,6 +43,7 @@ jobs:
         with:
           push: true
           tags: mikhailkochetkov/infra-web:latest
+          file: api_yamdb/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
