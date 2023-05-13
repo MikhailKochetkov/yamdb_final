@@ -82,7 +82,7 @@ class Command(BaseCommand):
     help = 'Для загрузки данных в БД'
 
     def handle(self, *args, **options):
-        if (files := lost_files(FILE_NAMES_MODELS.keys(), FILES_DIR)):
+        if files := lost_files(FILE_NAMES_MODELS.keys(), FILES_DIR):
             print(f"Отсутствуют необходимые файлы: "
                   f"{', '.join(x for x in files)}.")
             sys.exit('Работа завершена с ошибками.')
