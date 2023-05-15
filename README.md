@@ -6,29 +6,67 @@
 Администраторы ресурса добавляет новые произведения и категории (книга, фильм, музыка и т.д.)
 Также присутствует файл docker-compose, позволяющий , быстро развернуть контейнер базы данных (PostgreSQL), контейнер проекта django + gunicorn и контейнер nginx
 
-## Инструкция по запуску
+### Как запустить проект:
 
-Для запуска необходимо из корневой папки проекта ввести в консоль  команду:
-```
-sudo docker-compose up --build
-```
-Получаем id контейнера
-```
-sudo docker container ls
-```
-Запускаем контейнер
-```
-sudo docker exec -it <CONTAINER ID> sh
-```
-Делаем миграцию БД и сбор статики
-```
-python3 manage.py migrate
-python3 manage.py collectstatic
+Клонируем репозиторий:
+```bash
+git clone git@github.com:MikhailKochetkov/yamdb_final.git
 ```
 
-## Как пользоваться
+Создаем и активируем виртуальное окружение:
+```bash
+python -m venv venv
+source /venv/Scripts/activate
+python -m pip install --upgrade pip
+```
 
-После запуска проекта подробную инструкцию можно будет посмотреть по адресу http://<IP-адрес сервера>/static/redoc/
+Ставим зависимости из requirements.txt:
+```bash
+pip install -r requirements.txt
+```
+
+Переходим в папку с файлом docker-compose.yaml:
+```bash
+cd infra
+```
+
+Поднимаем контейнеры:
+```bash
+docker-compose up -d --build
+```
+
+Выполняем миграции:
+```bash
+docker-compose exec web python manage.py makemigrations reviews
+```
+```bash
+docker-compose exec web python manage.py migrate
+```
+
+Создаем суперпользователя:
+```bash
+docker-compose exec web python manage.py createsuperuser
+```
+
+Србираем статику:
+```bash
+docker-compose exec web python manage.py collectstatic --no-input
+```
+
+Создаем дамп базы данных (нет в текущем репозитории):
+```bash
+docker-compose exec web python manage.py dumpdata > dumpPostrgeSQL.json
+```
+
+Останавливаем контейнеры:
+```bash
+docker-compose down -v
+```
+
+### Шаблон наполнения .env (не включен в текущий репозиторий) расположенный по пути infra/.env.sample
+
+### Документация API YaMDb
+Документация доступна по эндпойнту: http://localhost/redoc/
 
 ## Автор
 
