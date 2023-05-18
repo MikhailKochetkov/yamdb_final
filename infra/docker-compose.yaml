@@ -27,8 +27,6 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - api_yamdb_value:/var/html/static/
       - api_yamdb_media:/var/html/media/
-      - .static/redoc.yaml:/var/html/redoc/redoc.yaml
-      - ./templates/redoc.html:/var/html/redoc/redoc.html
     depends_on:
       - web
 
