@@ -12,8 +12,16 @@ services:
     image: mikhailkochetkov/infra-web:latest
     restart: always
     volumes:
-      - api_yamdb_value:/app/static/
-      - api_yamdb_media:/app/media/
+      - type: volume
+        source: api_yamdb_value
+        target: /app/static/
+        volume:
+          nocopy: false
+      - type: volume
+        source: api_yamdb_media
+        target: /app/media/
+        volume:
+          nocopy: false
     depends_on:
       - db
     env_file:
